@@ -21,4 +21,11 @@ test {
     useJUnitPlatform()
 
     ignoreFailures = true
+
+    systemProperty "chromeoptions.prefs","intl.accept.languages=en"
+
+}
+
+CompileTestJava {
+    options.encoding='UTF-8'
 }
