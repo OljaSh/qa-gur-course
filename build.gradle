@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'io.qameta.allure' version '2.8.1'
+    id "io.franzbecker.gradle-lombok" version "4.0.0"
 }
 
 group 'guru.qa'
@@ -10,11 +12,29 @@ repositories {
     mavenCentral()
 }
 
-
 dependencies {
-    testImplementation 'com.codeborne:selenide:5.13.0'
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
+   // compile project(":lesson1")
+    compile project(":lesson4_allure")
+
+}
+dependencies {
+    compile 'com.codeborne:selenide:5.13.0'
+
+    compile 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+    compile 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+    compile 'org.junit.jupiter:junit-jupiter-params:5.6.2'
+    compile 'io.qameta.allure:allure-java-commons:2.13.5'
+
+    compile 'io.qameta.allure:allure-selenide:2.13.3'
+}
+
+allure {
+    autoconfigure = true
+    version = '2.13.5'
+
+    useJUnit5 {
+        version = '2.13.5'
+    }
 }
 
 test {
@@ -22,10 +42,33 @@ test {
 
     ignoreFailures = true
 
-    systemProperty "chromeoptions.prefs","intl.accept.languages=en"
+    systemProperty "chromeoptions.prefs", "intl.accept.languages=en"
 
 }
 
-CompileTestJava {
-    options.encoding='UTF-8'
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+subprojects {
+    apply plugin: 'java'
+       apply plugin: 'io.qameta.allure'
+
+
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        compile 'com.codeborne:selenide:5.13.0'
+
+        compile 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+        compile 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+        compile 'org.junit.jupiter:junit-jupiter-params:5.6.2'
+        compile 'io.qameta.allure:allure-java-commons:2.13.5'
+
+        compile 'io.qameta.allure:allure-selenide:2.13.3'
+    }
 }
