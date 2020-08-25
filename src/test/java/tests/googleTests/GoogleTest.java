@@ -15,12 +15,12 @@ class GoogleTest extends BaseTest {
 
     CommonData commonData = new CommonData();
 
-    String siteGoogle = "https://google.com";
+    String googleSite = "https://google.com";
 
 
     @Test
     void selenideSearchInGoogleTest() {
-        open(siteGoogle);
+        open(googleSite);
 
         $(byName("q")).setValue(commonData.searchCriteriaSelenide)
                 .pressEnter();
@@ -29,25 +29,11 @@ class GoogleTest extends BaseTest {
     }
 
     @Test
-    void googleLogoIsPresentTest() {
-        open(siteGoogle);
+    void googlePageElementsPresentTest() {
+        open(googleSite);
 
-        $(byId("logo-default")).shouldBe(visible);
+        $("#logo-default").shouldBe(visible);
+        $("#realbox").shouldBe(visible);
+        $("#realbox-microphone").shouldBe(visible);
     }
-
-    @Test
-    void googleSearchBarIsPresent() {
-        open(siteGoogle);
-
-        $(byId("realbox")).shouldBe(visible);
-    }
-
-    @Test
-    void googleMicrofonLogoIsPresent() {
-        open(siteGoogle);
-
-        $(byId("realbox-microphone")).shouldBe(visible);
-    }
-
-
 }
